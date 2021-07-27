@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
      <ng-template #noServer>
        <p>{{serverCreationStatus}}</p>
      </ng-template>
-     <div app-server></div><div app-server></div><hr> Testing multiline
+     <div app-server *ngFor="let server of serverList"></div><hr> Testing multiline
 
 to see if it works in combination with single quotes. it does work :)</div></div></div>
     `,
@@ -26,6 +26,7 @@ export class ServersComponent implements OnInit {
   serverCreationStatus = 'No Server Created';
   serverName = '';
   isServerCreated = false;
+  serverList = [];
 
   constructor() {
     setTimeout(() => this.addServer = true, 2000);
@@ -35,7 +36,8 @@ export class ServersComponent implements OnInit {
   }
 
   onCreateServer(): string{
-    this.serverCreationStatus = 'Server Created Successfully. ServerId: '+this.serverName;
+    this.serverCreationStatus = 'Server Created Successfully. ServerId: ' + this.serverName;
+    this.serverList.push(this.serverName);
     this.isServerCreated = true;
     return this.serverCreationStatus;
   }
